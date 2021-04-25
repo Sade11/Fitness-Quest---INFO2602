@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block title %}Fitness Quest - Create Routine{% endblock %}
+{% block page %}
+
+  <div id = "createRoutine "class="collection">
+		{% for exercise in exercises %}
+		<a href="/create_routine" class="collection-item purple white-text" onclick="exercise({{exercise.id}})">{{exercise.name}}
+    {% endfor %}
+	</div>
+
+</ul>
+   
+{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+<br><br><br><div class="container">
+
+  <form class = "card" method = "POST" action="/createroutines">
+  <div class="mb-3">
+    <h2 for="exampleInputRoutine" class="d-flex justify-content-center">Create Routine</h2>
+   <input class="form-control form-control-lg" type="text" placeholder="Routine Name" name="routine_name" aria-label=".form-control-lg example"><br><br> 
+  </div>
+    <div class="d-flex justify-content-center">
+    <select name="exercise_name" class="form-select" aria-label="Default select example">
+      <option selected>Choose an exercise</option>
+      {% for exercise in exercises %}
+      <option value = "{{exercise.id}}"> {{exercise.name}} </option>
+      {% endfor %}
+   </select><br><br> 
+  </div>
+  <div class="mb-3">
+  <label for="exampleFormControlDescription" class="form-label">Description</label>
+  <textarea class="form-control" name="description" id="exampleFormControlDescription" rows="3"></textarea>
+  </div><br><br>
+
+   <div class="d-flex justify-content-center">
+    <select name="day" class="form-select" aria-label="Default select example">
+  <option selected>Choose a Day</option>
+  <option value="1">Day 1</option>
+  <option value="2">Day 2</option>
+  <option value="3">Day 3</option>
+  <option value="4">Day 4</option>
+  <option value="5">Day 5</option>
+   </select> 
+  </div>
+  <br><br>
+  <div class="d-flex justify-content-center">
+   <button type="submit" class="btn btn-primary" align:"center">Submit</button>
+  </div>
+  </form>
+
+  <!-- <div class='row'>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Routine Name</th>
+      <th scope="col">Exercise Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+    <tbody>
+      {% for createroutine in createroutines %}
+       <tr>
+           <th scope="row">{{createroutine.routine_name}}</th>
+              <td>{{createroutine.exercise_name}}</td>
+              <td>{{createroutine.description}}</td>
+              <td>{{createroutine.day}}</td>
+               <td>{{createroutine.created.strftime("%m/%d/%Y, %H:%M:%S")}}</td>
+               <td><a class="btn btn-primary" href="/deleteLog/{{createroutine.id}}" role="button">DELETE</a></td>
+            </tr>
+       {% endfor %}       
+    </tbody>
+  </table>
+</div> -->
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>
+
+{% endblock %}

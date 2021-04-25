@@ -1,0 +1,50 @@
+{% extends "layout.html" %} 
+{% block title %}Fitness Quest - Exercises{% endblock %} 
+{% block page %}
+
+	<div id = "exerciseList " class="collection">
+		{% for exercise in exercises %}
+		<a href="/exercises/{{exercise.id}}" class="collection-item purple white-text" onclick="exercise({{exercise.id}})">{{exercise.name}}</a>
+    {% endfor %}
+	</div>
+
+{% endblock %}
+{{ super() }} 
+{% block content %}
+
+
+<main class="col">
+	{% if exercise == None %}
+    <div class="row">
+      <h3>Select A Exercise</h3>
+    </div>
+    {% else %}
+	<!-- Exercise Detail Here -->
+	{% for exercise in exercises %}
+	<div class="row red-text" align="center">
+		<h1>{{exercise.name}} ({{exercise.target_area}})</h1><br><br><br><br>
+	</div>
+	<div class="row">
+		<div class="col" align="center" >
+       <iframe width="1000" height="500" src={{exercise.video_url}} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+       </iframe><br><br><br><br><br><br><br><br>
+		
+
+        {% endfor %}
+
+        {% endif %}
+
+        </div>
+       
+		
+    </main>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "layout.html" %} 
+{% block title %}Fitness Quest - Routine{% endblock %} 
+{% block page %}
+
+	<div id = "routineList "class="collection">
+		{% for routine in routines %}
+		<a href="/routines" class="collection-item purple white-text" >{{routine.name}}
+    {% endfor %}
+	</div>
+</ul>
+
+{% endblock %}
+ {{ super() }} 
+ {% block content %}
+
+
+<main class="col">
+	{% if routine == None %}
+    <div class="row">
+      <h3>No routines available. Please create a routine :) </h3>
+    </div>
+    {% else %}
+	<!-- Routine Detail Here -->
+	<div class="row red-text" align="center">
+		
+	</div>
+  <div class='row'>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Routine Name</th>
+      <th scope="col">Exercise Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+    <tbody>
+      {% for routine in routines %}
+       <tr>
+           <th scope="row">{{routine.routine_name}}</th>
+              <td>{{routine.exercise_name}}</td>
+              <td>{{routine.description}}</td>
+              <td>{{routine.day}}</td>
+               <td>{{routine.created.strftime("%m/%d/%Y, %H:%M:%S")}}</td>
+               <td><a class="btn btn-primary" href="/deleteLog/{{routine.id}}" role="button">DELETE</a></td>
+            </tr>
+       {% endfor %}       
+    </tbody>
+  </table>
+</div>
+
+        {% endif %}
+       
+       
+    </main>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block title %}Fitness Quest - Login{% endblock %}
+{% block page %}
+   
+{% endblock %}
+
+{{ super() }}
+{% block content %}
+<div class="container-fluid">
+
+  <!-- Spacing between navbar and card -->
+  <div class="row" style="margin-top:2.5%">
+
+    <div class="offset-md-4 col-md-4">
+      <div class="card">
+        <div class="card-header text-center">
+          <h2 style="text-align:center;">Login to Fitness Quest</h2>
+        </div>
+        <div class="card-body">
+
+          <form action="" method="POST">
+            {{ form.hidden_tag() }}
+
+              <!-- NAME -->
+              <div class="form-group" style="margin-bottom:0px;">
+                {{ form.username.label }} <br>
+                {{ form.username(class="form-control") }} <br>
+                {% for error in form.username.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+
+              
+              <!-- PASSWORD -->
+              <div class="form-group" style="margin-bottom:0px;">
+                {{ form.password.label }} <br>
+                {{ form.password(class="form-control") }} <br>
+                {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+              </div>
+
+              <!-- Submit Button -->
+              {{ form.submit(class="btn btn-primary", style="width:100%;") }}
+
+          </form>
+
+        </div>
+
+           <div class="border-top pt-3">
+        <small class="text-muted">
+            Need An Account? <a class="ml-2" href="{{ url_for('signup') }}">Sign Up Now</a>
+        </small>
+    </div>
+    
+      </div>
+    </div>
+
+  </div>
+   
+
+</div>
+{% endblock %}
+
+
